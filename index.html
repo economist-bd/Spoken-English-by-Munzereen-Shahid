@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>এক নজরে কুরআন</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h3>এক নজরে কুরআন</h3>
+    </header>
+
+    <div class="book-stage">
+        <div class="book-container" id="book-page">
+            
+            <div class="touch-zone left-zone" id="touch-left">
+                <span class="hint-arrow">❮</span>
+            </div>
+
+            <canvas id="pdf-render"></canvas>
+
+            <div class="touch-zone right-zone" id="touch-right">
+                <span class="hint-arrow">❯</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer-controls">
+        <span id="page-num">Page: 1</span>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
+</body>
+</html>

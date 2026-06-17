@@ -1,0 +1,117 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333; /* ডার্ক ব্যাকগ্রাউন্ড যাতে বই ফোকাসে থাকে */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* স্ক্রল বার বন্ধ */
+}
+
+header {
+    color: #ccc;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* --- বইয়ের মূল স্টেজ --- */
+.book-stage {
+    perspective: 2000px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* মোবাইলের জন্য অপ্টিমাইজড */
+}
+
+.book-container {
+    position: relative;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    max-height: 80vh; /* স্ক্রিনের বাইরে যাবে না */
+}
+
+/* --- টাচ জোন (Touch Zones) --- */
+.touch-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 25%; /* পাতার ২৫% অংশ জুড়ে থাকবে */
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* সাধারণত অদৃশ্য থাকবে */
+    transition: all 0.3s ease;
+}
+
+.left-zone {
+    left: 0;
+}
+
+.right-zone {
+    right: 0;
+}
+
+/* টাচ বা হোভার করলে কি হবে */
+.touch-zone:hover, .touch-zone:active {
+    opacity: 1;
+}
+
+/* ডান পাশে টাচ করলে পাতার কোণা ভাজ হওয়ার ইফেক্ট */
+.right-zone:hover {
+    background: linear-gradient(to left, rgba(0,0,0,0.2), transparent);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+/* বাম পাশে টাচ করলে */
+.left-zone:hover {
+    background: linear-gradient(to right, rgba(0,0,0,0.2), transparent);
+}
+
+.hint-arrow {
+    font-size: 30px;
+    color: white;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- পাতা উল্টানোর অ্যানিমেশন --- */
+
+/* সামনে যাওয়ার সময় (Next) */
+.flip-next {
+    transform: rotateY(-180deg);
+    box-shadow: 10px 0 20px rgba(0,0,0,0.2); /* উল্টানোর সময় ছায়া */
+}
+
+/* পেছনে আসার সময় (Prev) */
+.flip-prev {
+    transform: rotateY(0deg); /* রিসেট */
+}
+
+.footer-controls {
+    color: white;
+    margin-bottom: 20px;
+    background: rgba(0,0,0,0.5);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
